@@ -35,8 +35,8 @@ API access is **free** and enables saved wheels, plan-based limits, and usage tr
 4. Give it a name like "Discord Bot"
 5. **Important**: Copy both the **API Key** and **API Secret** immediately - the secret is only shown once!
 
-**Free plan limits**: 100 API requests/hour, 100 entries/wheel, 3 saved wheels
-**Boost plan ($29/mo)**: Unlimited requests, unlimited entries, unlimited wheels
+**Free plan limits**: 100 API requests/hour, 100 names/wheel, 3 saved wheels
+**Boost plan ($29/mo)**: Unlimited requests, unlimited names, unlimited wheels
 
 ### 3. Configure the Bot
 
