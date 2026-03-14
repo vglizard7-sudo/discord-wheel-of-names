@@ -1,6 +1,6 @@
 FROM node:18-bullseye
 
-# Install system libraries for canvas
+# Install system libraries needed by canvas
 RUN apt-get update && apt-get install -y \
     libcairo2-dev \
     libjpeg-dev \
@@ -9,19 +9,23 @@ RUN apt-get update && apt-get install -y \
     librsvg2-dev \
     build-essential \
     python3 \
+    pkg-config \
+    git \
     && rm -rf /var/lib/apt/lists/*
 
+# Set working directory
 WORKDIR /app
 
-# Copy package files and install dependencies
+# Copy package files first (better caching)
 COPY package*.json ./
-RUN npm install
 
-# Copy the rest of the source code
+# Clean install dependencies
+RUN rm -rf node_modules package-lock.json \
+ && npm install \
+ && npm rebuild @napi-rs/canvas --build-from-source
+
+# Copy source code
 COPY . .
-
-# Optional: rebuild canvas in case optional binaries failed
-RUN npm rebuild @napi-rs/canvas
 
 # Start the bot
 CMD ["node", "index.js"]
